@@ -1,10 +1,10 @@
-package container_test
+package linkedlist_test
 
 import (
 	"log"
 	"testing"
 
-	. "github.com/febrian-430/data-structure-doodles/container"
+	. "github.com/febrian-430/data-structure-doodles/LinkedList"
 )
 
 func TestNodeNext(t *testing.T) {
@@ -102,5 +102,28 @@ func TestPush(t *testing.T) {
 			t.Fail()
 		}
 	}
+}
 
+func TestEmpty(t *testing.T) {
+	tests := []struct {
+		context string
+		val     []int
+		expect  bool
+	}{
+		{context: "when list contains no element", val: []int{}, expect: true},
+		{context: "when contains element", val: []int{1, 2, 1}, expect: false},
+	}
+
+	for _, testcase := range tests {
+		list := NewLinkedList()
+		list.Push(testcase.val...)
+		got := list.Empty()
+
+		if testcase.expect != got {
+			t.Log(testcase.context)
+
+			t.Logf("Expected %v, got %v", testcase.expect, got)
+			t.Fail()
+		}
+	}
 }
